@@ -1,0 +1,38 @@
+[project]
+name = "agriconnect-ai-backend"
+version = "0.1.0"
+description = "Backend API for AgriConnect AI"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi==0.115.0",
+    "uvicorn[standard]==0.30.6",
+    "python-multipart==0.0.12",
+    "sqlalchemy[asyncio]==2.0.35",
+    "alembic==1.13.3",
+    "asyncpg==0.29.0",
+    "redis[hiredis]==5.1.1",
+    "boto3==1.35.0",
+    "python-jose[cryptography]==3.3.0",
+    "pydantic[email]==2.9.2",
+    "pydantic-settings==2.5.2",
+    "openai==1.51.0",
+    "faster-whisper==1.0.3",
+    "soundfile==0.12.1",
+    "httpx==0.27.2",
+    "tenacity==9.0.0",
+    "structlog==24.4.0",
+    "python-dotenv==1.0.1",
+    "requests>=2.34.2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==8.3.3",
+  "pytest-asyncio==0.24.0",
+  "pytest-mock==3.14.0",
+  "httpx==0.27.2",
+  "factory-boy==3.3.1",
+  "pytest-cov==5.0.0",
+  "ruff==0.6.9",
+]

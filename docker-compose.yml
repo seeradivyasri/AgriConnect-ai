@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: your_db_user
+      POSTGRES_PASSWORD: your_db_pass
+      POSTGRES_DB: agriconnect
+    command: postgres -c shared_buffers=128MB -c max_connections=50
+    mem_limit: 512m
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 100mb --maxmemory-policy allkeys-lru
+    mem_limit: 128m
+    volumes:
+      - redis_data:/data
+
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: your-minio-access-key
+      MINIO_ROOT_PASSWORD: your-minio-secret-key
+    command: server /data --console-address ":9001"
+    mem_limit: 256m
+    volumes:
+      - minio_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:
