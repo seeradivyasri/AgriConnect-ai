@@ -1,0 +1,32 @@
+# Git
+.git
+.gitignore
+
+# Environments
+.env
+venv/
+env/
+ENV/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# IDEs and Tools
+.vscode/
+.idea/
+.gemini/
+*.swp
+*.swo
+
+# Jupyter
+notebooks/
+*.ipynb
+.ipynb_checkpoints/
+
+# System
+.DS_Store
+Thumbs.db

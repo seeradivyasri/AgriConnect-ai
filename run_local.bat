@@ -1,0 +1,9 @@
+@echo off
+echo Starting Anomaly Detection API...
+start "API Server" cmd /k "venv\Scripts\activate.bat && python -m uvicorn api.main:app --port 8000"
+
+echo Waiting for API to start...
+timeout /t 5
+
+echo Starting Streamlit Dashboard...
+start "Dashboard" cmd /k "venv\Scripts\activate.bat && python -m streamlit run dashboard/app.py"

@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: anomaly_api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    networks:
+      - anomaly_net
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: anomaly_dashboard
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+    networks:
+      - anomaly_net
+    environment:
+      - API_URL=http://api:8000/predict
+
+  redis:
+    image: redis:7-alpine
+    container_name: anomaly_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - anomaly_net
+    volumes:
+      - redis_data:/data
+
+networks:
+  anomaly_net:
+    driver: bridge
+
+volumes:
+  redis_data:
